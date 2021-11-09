@@ -88,9 +88,9 @@ Partial Class Form1
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.picKurwa.BackColor = System.Drawing.Color.White
-        Me.picKurwa.Location = New System.Drawing.Point(278, 0)
+        Me.picKurwa.Location = New System.Drawing.Point(278, 12)
         Me.picKurwa.Name = "picKurwa"
-        Me.picKurwa.Size = New System.Drawing.Size(496, 422)
+        Me.picKurwa.Size = New System.Drawing.Size(496, 410)
         Me.picKurwa.TabIndex = 6
         Me.picKurwa.TabStop = False
         '
