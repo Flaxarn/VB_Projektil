@@ -22,10 +22,106 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        components = New System.ComponentModel.Container()
+        Me.lblVinkel = New System.Windows.Forms.Label()
+        Me.lblHastighet = New System.Windows.Forms.Label()
+        Me.txtVinkel = New System.Windows.Forms.TextBox()
+        Me.txtHastighet = New System.Windows.Forms.TextBox()
+        Me.btnRita = New System.Windows.Forms.Button()
+        Me.btnRensa = New System.Windows.Forms.Button()
+        Me.picKurwa = New System.Windows.Forms.PictureBox()
+        CType(Me.picKurwa, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SuspendLayout()
+        '
+        'lblVinkel
+        '
+        Me.lblVinkel.AutoSize = True
+        Me.lblVinkel.Location = New System.Drawing.Point(12, 17)
+        Me.lblVinkel.Name = "lblVinkel"
+        Me.lblVinkel.Size = New System.Drawing.Size(59, 25)
+        Me.lblVinkel.TabIndex = 0
+        Me.lblVinkel.Text = "Vinkel"
+        '
+        'lblHastighet
+        '
+        Me.lblHastighet.AutoSize = True
+        Me.lblHastighet.Location = New System.Drawing.Point(12, 54)
+        Me.lblHastighet.Name = "lblHastighet"
+        Me.lblHastighet.Size = New System.Drawing.Size(88, 25)
+        Me.lblHastighet.TabIndex = 1
+        Me.lblHastighet.Text = "Hastighet"
+        '
+        'txtVinkel
+        '
+        Me.txtVinkel.Location = New System.Drawing.Point(106, 14)
+        Me.txtVinkel.Name = "txtVinkel"
+        Me.txtVinkel.Size = New System.Drawing.Size(150, 31)
+        Me.txtVinkel.TabIndex = 2
+        '
+        'txtHastighet
+        '
+        Me.txtHastighet.Location = New System.Drawing.Point(106, 51)
+        Me.txtHastighet.Name = "txtHastighet"
+        Me.txtHastighet.Size = New System.Drawing.Size(150, 31)
+        Me.txtHastighet.TabIndex = 3
+        '
+        'btnRita
+        '
+        Me.btnRita.Location = New System.Drawing.Point(106, 88)
+        Me.btnRita.Name = "btnRita"
+        Me.btnRita.Size = New System.Drawing.Size(150, 34)
+        Me.btnRita.TabIndex = 4
+        Me.btnRita.Text = "Rita!"
+        Me.btnRita.UseVisualStyleBackColor = True
+        '
+        'btnRensa
+        '
+        Me.btnRensa.Location = New System.Drawing.Point(106, 128)
+        Me.btnRensa.Name = "btnRensa"
+        Me.btnRensa.Size = New System.Drawing.Size(150, 34)
+        Me.btnRensa.TabIndex = 5
+        Me.btnRensa.Text = "Rensa!"
+        Me.btnRensa.UseVisualStyleBackColor = True
+        '
+        'picKurwa
+        '
+        Me.picKurwa.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.picKurwa.BackColor = System.Drawing.Color.White
+        Me.picKurwa.Location = New System.Drawing.Point(278, 0)
+        Me.picKurwa.Name = "picKurwa"
+        Me.picKurwa.Size = New System.Drawing.Size(496, 422)
+        Me.picKurwa.TabIndex = 6
+        Me.picKurwa.TabStop = False
+        '
+        'Form1
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(10.0!, 25.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.BackColor = System.Drawing.SystemColors.Control
+        Me.ClientSize = New System.Drawing.Size(786, 434)
+        Me.Controls.Add(Me.picKurwa)
+        Me.Controls.Add(Me.btnRensa)
+        Me.Controls.Add(Me.btnRita)
+        Me.Controls.Add(Me.txtHastighet)
+        Me.Controls.Add(Me.txtVinkel)
+        Me.Controls.Add(Me.lblHastighet)
+        Me.Controls.Add(Me.lblVinkel)
+        Me.MaximumSize = New System.Drawing.Size(1150, 600)
+        Me.MinimumSize = New System.Drawing.Size(808, 490)
+        Me.Name = "Form1"
         Me.Text = "Form1"
+        CType(Me.picKurwa, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ResumeLayout(False)
+        Me.PerformLayout()
+
     End Sub
 
+    Friend WithEvents lblVinkel As Label
+    Friend WithEvents lblHastighet As Label
+    Friend WithEvents txtVinkel As TextBox
+    Friend WithEvents txtHastighet As TextBox
+    Friend WithEvents btnRita As Button
+    Friend WithEvents btnRensa As Button
+    Friend WithEvents picKurwa As PictureBox
 End Class
