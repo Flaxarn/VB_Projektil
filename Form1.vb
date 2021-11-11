@@ -112,24 +112,44 @@
 
         ' Returnera miss
         Return False
-
     End Function
 
     Private Sub NyttMal()
 
-        ' Hitta kordinater för mål
+        ' Skapa kordinater för nytt mål
         xMal = picKurwa.Width * Rnd()
         yMal = picKurwa.Height * Rnd()
     End Sub
 
     Private Sub Rensa()
 
-        ' Rensa alla inmatningar samt pictureBox
+        ' Rensa alla inmatningar samt pictureBox, skapa nytt mål och rita målet
         picKurwa.CreateGraphics.Clear(picKurwa.BackColor)
         txtHastighet.Text = ""
         txtVinkel.Text = ""
         NyttMal()
         RitaMal(xMal, yMal)
+    End Sub
+
+    Private Sub picKurwa_MouseMove(sender As Object, e As MouseEventArgs) Handles picKurwa.MouseMove
+
+        ' Variabler för mus position och ritfunktioner
+        Dim linje As System.Drawing.Graphics                                                    ' Skapa linje
+        Dim penna As New System.Drawing.Pen(Brushes.Green, 2)                                   ' Skapa penna
+        Dim sudd As New System.Drawing.Pen(picKurwa.BackColor, 2)                               ' Skapa sudd
+        Static x, y As Single                                                                   ' Kom ihåg linjens position
+
+        ' Gör om musposition till position i picturebox
+        If e.Button = MouseButtons.Left Then                                                    ' Om vänster musknapp trycks ner
+            linje = picKurwa.CreateGraphics
+            linje.DrawLine(sudd, x, y, 0, picKurwa.Height)                                      ' Sudda gammal linje
+            x = e.X                                                                             ' Hämta mus X pos
+            y = e.Y                                                                             ' Hämta mus Y pos
+            txtHastighet.Text = Math.Round(Math.Sqrt(x * x + (picKurwa.Height - y) ^ 2), 0)     ' Skriv ut hastigheten i txtbox
+            txtVinkel.Text = Math.Round(Math.Atan((picKurwa.Height - y) / x) * 180 / Math.PI, 1) ' Skriv ut vinkeln i txtbox
+            linje.DrawLine(penna, x, y, 0, picKurwa.Height)                                     ' Rita ny linje
+            RitaMal(xMal, yMal)                                                                 ' Rita målet på nytt
+        End If
     End Sub
 
     Private Sub Timer_Tick(sender As Object, e As EventArgs) Handles Timer.Tick
@@ -144,7 +164,7 @@
         If tidKvar.TotalSeconds > 60 Then
             ' Nolla tidstexten
             lblTid.Text = 0
-            ' Enabla börja knappen, disabla skjut
+            ' Enabla börja knappen, disabla skjut knapp
             btnBorja.Enabled = True
             btnSkjut.Enabled = False
             ' Stoppa timer

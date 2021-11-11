@@ -103,19 +103,19 @@ Partial Class Form1
         'lblAntalTraffar
         '
         Me.lblAntalTraffar.AutoSize = True
-        Me.lblAntalTraffar.Location = New System.Drawing.Point(168, 203)
+        Me.lblAntalTraffar.Location = New System.Drawing.Point(129, 203)
         Me.lblAntalTraffar.Name = "lblAntalTraffar"
-        Me.lblAntalTraffar.Size = New System.Drawing.Size(36, 25)
+        Me.lblAntalTraffar.Size = New System.Drawing.Size(121, 25)
         Me.lblAntalTraffar.TabIndex = 8
-        Me.lblAntalTraffar.Text = "<>"
+        Me.lblAntalTraffar.Text = "lblAntalTraffar"
         '
         'Timer
         '
         '
-        'BtnBorja
+        'btnBorja
         '
         Me.btnBorja.Location = New System.Drawing.Point(106, 89)
-        Me.btnBorja.Name = "BtnBorja"
+        Me.btnBorja.Name = "btnBorja"
         Me.btnBorja.Size = New System.Drawing.Size(150, 34)
         Me.btnBorja.TabIndex = 9
         Me.btnBorja.Text = "Börja!"
@@ -133,11 +133,11 @@ Partial Class Form1
         'lblTid
         '
         Me.lblTid.AutoSize = True
-        Me.lblTid.Location = New System.Drawing.Point(168, 178)
+        Me.lblTid.Location = New System.Drawing.Point(129, 178)
         Me.lblTid.Name = "lblTid"
-        Me.lblTid.Size = New System.Drawing.Size(36, 25)
+        Me.lblTid.Size = New System.Drawing.Size(55, 25)
         Me.lblTid.TabIndex = 11
-        Me.lblTid.Text = "<>"
+        Me.lblTid.Text = "lblTid"
         '
         'Form1
         '
