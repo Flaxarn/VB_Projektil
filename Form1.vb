@@ -1,21 +1,23 @@
 ﻿Public Class Form1
+
     'Globala variabler
     Dim xMal, yMal As Single
     Dim antalTraffar As Integer
     Private Sub btnRita_Click(sender As Object, e As EventArgs) Handles btnRita.Click
+
         ' Definiering av variabler som behövs till o rita
         Dim x, y, hastighet, tid, vinkel As Single
         Dim punkt As System.Drawing.Graphics                   ' En punkt som ritas
         Dim penna As New System.Drawing.Pen(Brushes.Black, 4)  ' En penna som ritar
 
-        'Hämta data
+        'Hämta och sätt data
         hastighet = Val(txtHastighet.Text)
         vinkel = Val(txtVinkel.Text)
         punkt = picKurwa.CreateGraphics()
 
         Do
             'Öka tiden
-            tid = tid + 10 / hastighet
+            tid = tid + 1 / hastighet ' Justerar mellanrum mellan prickar
 
             ' Beräkna aktuell position
             x = hastighet * Math.Cos(vinkel * Math.PI / 180) * tid
@@ -39,7 +41,8 @@
         picKurwa.CreateGraphics.Clear(picKurwa.BackColor)
         txtHastighet.Text = ""
         txtVinkel.Text = ""
-        ritaMal()
+        NyttMal()
+        RitaMal(xMal, yMal)
     End Sub
 
     Private Sub txtVinkel_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles txtVinkel.Validating
@@ -54,15 +57,11 @@
         End If
     End Sub
 
-    Private Sub ritaMal()
+    Private Sub RitaMal(xMal As Single, yMal As Single)
 
         ' Definiera variabler för mål
         Dim punkt As System.Drawing.Graphics
         Dim penna As New System.Drawing.Pen(Brushes.Red, 4)
-
-        ' Hitta kordinater för mål
-        xMal = picKurwa.Width * Rnd()
-        yMal = picKurwa.Height * Rnd()
 
         ' Rita ut målet
         punkt = picKurwa.CreateGraphics
@@ -70,12 +69,15 @@
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        'Skriv ut antalet träffar och ge nya kordinater för mål
         lblAntalTraffar.Text = antalTraffar
+        NyttMal()
     End Sub
 
-    Private Sub Form1_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
-        ' Rita mål 
-        ritaMal()
+    Private Sub Form1_Paint(sender As Object, e As EventArgs) Handles Me.Paint
+        ' Rita mål vid laddning
+        RitaMal(xMal, yMal)
     End Sub
 
     Private Function Traff(x As Single, y As Single) As Boolean
@@ -94,5 +96,12 @@
         ' Returnera miss
         Return False
 
+    End Function
+
+    Private Function NyttMal()
+        ' Hitta kordinater för mål
+        xMal = picKurwa.Width * Rnd()
+        yMal = picKurwa.Height * Rnd()
+        Return True
     End Function
 End Class
