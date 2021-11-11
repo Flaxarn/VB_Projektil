@@ -1,9 +1,28 @@
 ﻿Public Class Form1
 
     'Globala variabler
-    Dim xMal, yMal As Single
-    Dim antalTraffar As Integer
-    Private Sub btnRita_Click(sender As Object, e As EventArgs) Handles btnRita.Click
+    Dim xMal, yMal As Single    ' Målets position
+    Dim antalTraffar As Integer ' Antalet träffar
+    Dim startTid As Long        ' Start tid
+
+    Private Sub BtnBorja_Click(sender As Object, e As EventArgs) Handles btnBorja.Click
+
+        ' Tillåt skjut knapp och inte börja knapp
+        btnSkjut.Enabled = True
+        btnBorja.Enabled = False
+
+        ' Nollställ antal träffar
+        antalTraffar = 0
+        lblAntalTraffar.Text = antalTraffar
+
+        ' Starta timer
+        Timer.Start()
+
+        ' Sätt start tid
+        startTid = Now.Ticks
+
+    End Sub
+    Private Sub btnRita_Click(sender As Object, e As EventArgs) Handles btnSkjut.Click
 
         ' Definiering av variabler som behövs till o rita
         Dim x, y, hastighet, tid, vinkel As Single
@@ -31,29 +50,22 @@
                 Exit Do
 
             End If
-
         Loop While x < picKurwa.Width And y > 0 And y < picKurwa.Height   ' Loopa medans punkten är inne i picbox
-    End Sub
-
-    Private Sub btnRensa_Click(sender As Object, e As EventArgs) Handles btnRensa.Click
-
-        ' Rensa alla inmatningar samt pictureBox
-        picKurwa.CreateGraphics.Clear(picKurwa.BackColor)
-        txtHastighet.Text = ""
-        txtVinkel.Text = ""
-        NyttMal()
-        RitaMal(xMal, yMal)
     End Sub
 
     Private Sub txtVinkel_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles txtVinkel.Validating
 
-        ' Tillåt endast godkända värden och disabla rita om fel
-        If (Val(txtVinkel.Text) > 90 Or Val(txtVinkel.Text) < 0) Then
-            btnRita.Enabled = False
-            txtVinkel.BackColor = Color.Pink
-        Else
-            btnRita.Enabled = True
-            txtVinkel.BackColor = SystemColors.Window
+        'Om börja knapp är enabled kan vi kolla validering
+        If Timer.Enabled = True Then
+
+            ' Tillåt endast godkända värden och disabla rita om fel
+            If (Val(txtVinkel.Text) > 90 Or Val(txtVinkel.Text) < 0) Then
+                btnSkjut.Enabled = False
+                txtVinkel.BackColor = Color.Pink
+            Else
+                btnSkjut.Enabled = True
+                txtVinkel.BackColor = SystemColors.Window
+            End If
         End If
     End Sub
 
@@ -70,12 +82,14 @@
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        'Skriv ut antalet träffar och ge nya kordinater för mål
+        'Skriv ut antalet träffar och ge nya kordinater för mål, se till att rita knapp är disabled
         lblAntalTraffar.Text = antalTraffar
         NyttMal()
+        btnSkjut.Enabled = False
     End Sub
 
     Private Sub Form1_Paint(sender As Object, e As EventArgs) Handles Me.Paint
+
         ' Rita mål vid laddning
         RitaMal(xMal, yMal)
     End Sub
@@ -84,11 +98,14 @@
 
         ' Kolla om samma x, y kordinater som målet
         If Math.Abs(x + 5 - xMal) < 10 And Math.Abs(y + 5 - yMal) < 10 Then
+
             ' Öka antalet träffar
             antalTraffar += 1
             lblAntalTraffar.Text = antalTraffar
+
             ' Rensa rutan och rita nytt mål
-            btnRensa.PerformClick()
+            Rensa()
+
             ' Returnera att det var en träff
             Return True
         End If
@@ -98,10 +115,40 @@
 
     End Function
 
-    Private Function NyttMal()
+    Private Sub NyttMal()
+
         ' Hitta kordinater för mål
         xMal = picKurwa.Width * Rnd()
         yMal = picKurwa.Height * Rnd()
-        Return True
-    End Function
+    End Sub
+
+    Private Sub Rensa()
+
+        ' Rensa alla inmatningar samt pictureBox
+        picKurwa.CreateGraphics.Clear(picKurwa.BackColor)
+        txtHastighet.Text = ""
+        txtVinkel.Text = ""
+        NyttMal()
+        RitaMal(xMal, yMal)
+    End Sub
+
+    Private Sub Timer_Tick(sender As Object, e As EventArgs) Handles Timer.Tick
+
+        ' Varibaler för tid kvar på timer
+        Dim tidPaserad As Long = Now.Ticks - startTid
+        Dim tidKvar As New TimeSpan(tidPaserad)
+
+        'Skriv ut tid kvar
+        lblTid.Text = 60 - tidKvar.TotalSeconds
+
+        If tidKvar.TotalSeconds > 60 Then
+            ' Nolla tidstexten
+            lblTid.Text = 0
+            ' Enabla börja knappen, disabla skjut
+            btnBorja.Enabled = True
+            btnSkjut.Enabled = False
+            ' Stoppa timer
+            Timer.Stop()
+        End If
+    End Sub
 End Class
