@@ -1,4 +1,7 @@
 ﻿Public Class Form1
+    'Globala variabler
+    Dim xMal, yMal As Single
+    Dim antalTraffar As Integer
     Private Sub btnRita_Click(sender As Object, e As EventArgs) Handles btnRita.Click
         ' Definiering av variabler som behövs till o rita
         Dim x, y, hastighet, tid, vinkel As Single
@@ -12,7 +15,7 @@
 
         Do
             'Öka tiden
-            tid = tid + 0.25
+            tid = tid + 10 / hastighet
 
             ' Beräkna aktuell position
             x = hastighet * Math.Cos(vinkel * Math.PI / 180) * tid
@@ -21,18 +24,26 @@
             ' Rita ut punkten
             punkt.DrawEllipse(penna, x, y, 2, 2)
 
+            ' Kolla om träff av mål
+            If Traff(x, y) Then
+                Exit Do
+
+            End If
 
         Loop While x < picKurwa.Width And y > 0 And y < picKurwa.Height   ' Loopa medans punkten är inne i picbox
     End Sub
 
     Private Sub btnRensa_Click(sender As Object, e As EventArgs) Handles btnRensa.Click
+
         ' Rensa alla inmatningar samt pictureBox
         picKurwa.CreateGraphics.Clear(picKurwa.BackColor)
         txtHastighet.Text = ""
         txtVinkel.Text = ""
+        ritaMal()
     End Sub
 
     Private Sub txtVinkel_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles txtVinkel.Validating
+
         ' Tillåt endast godkända värden och disabla rita om fel
         If (Val(txtVinkel.Text) > 90 Or Val(txtVinkel.Text) < 0) Then
             btnRita.Enabled = False
@@ -42,4 +53,46 @@
             txtVinkel.BackColor = SystemColors.Window
         End If
     End Sub
+
+    Private Sub ritaMal()
+
+        ' Definiera variabler för mål
+        Dim punkt As System.Drawing.Graphics
+        Dim penna As New System.Drawing.Pen(Brushes.Red, 4)
+
+        ' Hitta kordinater för mål
+        xMal = picKurwa.Width * Rnd()
+        yMal = picKurwa.Height * Rnd()
+
+        ' Rita ut målet
+        punkt = picKurwa.CreateGraphics
+        punkt.DrawEllipse(penna, xMal, yMal, 10, 10)
+    End Sub
+
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        lblAntalTraffar.Text = antalTraffar
+    End Sub
+
+    Private Sub Form1_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        ' Rita mål 
+        ritaMal()
+    End Sub
+
+    Private Function Traff(x As Single, y As Single) As Boolean
+
+        ' Kolla om samma x, y kordinater som målet
+        If Math.Abs(x + 5 - xMal) < 10 And Math.Abs(y + 5 - yMal) < 10 Then
+            ' Öka antalet träffar
+            antalTraffar += 1
+            lblAntalTraffar.Text = antalTraffar
+            ' Rensa rutan och rita nytt mål
+            btnRensa.PerformClick()
+            ' Returnera att det var en träff
+            Return True
+        End If
+
+        ' Returnera miss
+        Return False
+
+    End Function
 End Class

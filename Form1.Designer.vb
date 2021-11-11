@@ -29,6 +29,8 @@ Partial Class Form1
         Me.btnRita = New System.Windows.Forms.Button()
         Me.btnRensa = New System.Windows.Forms.Button()
         Me.picKurwa = New System.Windows.Forms.PictureBox()
+        Me.lbl1 = New System.Windows.Forms.Label()
+        Me.lblAntalTraffar = New System.Windows.Forms.Label()
         CType(Me.picKurwa, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -94,12 +96,32 @@ Partial Class Form1
         Me.picKurwa.TabIndex = 6
         Me.picKurwa.TabStop = False
         '
+        'lbl1
+        '
+        Me.lbl1.AutoSize = True
+        Me.lbl1.Location = New System.Drawing.Point(12, 178)
+        Me.lbl1.Name = "lbl1"
+        Me.lbl1.Size = New System.Drawing.Size(111, 25)
+        Me.lbl1.TabIndex = 7
+        Me.lbl1.Text = "Antal Träffar:"
+        '
+        'lblAntalTraffar
+        '
+        Me.lblAntalTraffar.AutoSize = True
+        Me.lblAntalTraffar.Location = New System.Drawing.Point(193, 178)
+        Me.lblAntalTraffar.Name = "lblAntalTraffar"
+        Me.lblAntalTraffar.Size = New System.Drawing.Size(36, 25)
+        Me.lblAntalTraffar.TabIndex = 8
+        Me.lblAntalTraffar.Text = "<>"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(10.0!, 25.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
         Me.ClientSize = New System.Drawing.Size(786, 434)
+        Me.Controls.Add(Me.lblAntalTraffar)
+        Me.Controls.Add(Me.lbl1)
         Me.Controls.Add(Me.picKurwa)
         Me.Controls.Add(Me.btnRensa)
         Me.Controls.Add(Me.btnRita)
@@ -124,4 +146,6 @@ Partial Class Form1
     Friend WithEvents btnRita As Button
     Friend WithEvents btnRensa As Button
     Friend WithEvents picKurwa As PictureBox
+    Friend WithEvents lbl1 As Label
+    Friend WithEvents lblAntalTraffar As Label
 End Class
