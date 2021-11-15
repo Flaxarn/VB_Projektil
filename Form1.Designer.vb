@@ -27,7 +27,6 @@ Partial Class Form1
         Me.lblHastighet = New System.Windows.Forms.Label()
         Me.txtVinkel = New System.Windows.Forms.TextBox()
         Me.txtHastighet = New System.Windows.Forms.TextBox()
-        Me.btnSkjut = New System.Windows.Forms.Button()
         Me.picKurwa = New System.Windows.Forms.PictureBox()
         Me.lbl1 = New System.Windows.Forms.Label()
         Me.lblAntalTraffar = New System.Windows.Forms.Label()
@@ -46,6 +45,7 @@ Partial Class Form1
         Me.lblVinkel.Size = New System.Drawing.Size(59, 25)
         Me.lblVinkel.TabIndex = 0
         Me.lblVinkel.Text = "Vinkel"
+        Me.lblVinkel.Visible = False
         '
         'lblHastighet
         '
@@ -55,6 +55,7 @@ Partial Class Form1
         Me.lblHastighet.Size = New System.Drawing.Size(88, 25)
         Me.lblHastighet.TabIndex = 1
         Me.lblHastighet.Text = "Hastighet"
+        Me.lblHastighet.Visible = False
         '
         'txtVinkel
         '
@@ -62,6 +63,7 @@ Partial Class Form1
         Me.txtVinkel.Name = "txtVinkel"
         Me.txtVinkel.Size = New System.Drawing.Size(150, 31)
         Me.txtVinkel.TabIndex = 2
+        Me.txtVinkel.Visible = False
         '
         'txtHastighet
         '
@@ -69,15 +71,7 @@ Partial Class Form1
         Me.txtHastighet.Name = "txtHastighet"
         Me.txtHastighet.Size = New System.Drawing.Size(150, 31)
         Me.txtHastighet.TabIndex = 3
-        '
-        'btnSkjut
-        '
-        Me.btnSkjut.Location = New System.Drawing.Point(106, 129)
-        Me.btnSkjut.Name = "btnSkjut"
-        Me.btnSkjut.Size = New System.Drawing.Size(150, 34)
-        Me.btnSkjut.TabIndex = 4
-        Me.btnSkjut.Text = "Skjut!"
-        Me.btnSkjut.UseVisualStyleBackColor = True
+        Me.txtHastighet.Visible = False
         '
         'picKurwa
         '
@@ -85,6 +79,7 @@ Partial Class Form1
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.picKurwa.BackColor = System.Drawing.Color.White
+        Me.picKurwa.Enabled = False
         Me.picKurwa.Location = New System.Drawing.Point(278, 12)
         Me.picKurwa.Name = "picKurwa"
         Me.picKurwa.Size = New System.Drawing.Size(496, 410)
@@ -151,7 +146,6 @@ Partial Class Form1
         Me.Controls.Add(Me.lblAntalTraffar)
         Me.Controls.Add(Me.lbl1)
         Me.Controls.Add(Me.picKurwa)
-        Me.Controls.Add(Me.btnSkjut)
         Me.Controls.Add(Me.txtHastighet)
         Me.Controls.Add(Me.txtVinkel)
         Me.Controls.Add(Me.lblHastighet)
@@ -170,7 +164,6 @@ Partial Class Form1
     Friend WithEvents lblHastighet As Label
     Friend WithEvents txtVinkel As TextBox
     Friend WithEvents txtHastighet As TextBox
-    Friend WithEvents btnSkjut As Button
     Friend WithEvents picKurwa As PictureBox
     Friend WithEvents lbl1 As Label
     Friend WithEvents lblAntalTraffar As Label

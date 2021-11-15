@@ -8,13 +8,14 @@
     Private Sub BtnBorja_Click(sender As Object, e As EventArgs) Handles btnBorja.Click
 
         ' Tillåt skjut knapp och inte börja knapp
-        btnSkjut.Enabled = True
+
         btnBorja.Enabled = False
 
         ' Nollställ antal träffar
         antalTraffar = 0
         lblAntalTraffar.Text = antalTraffar
-
+        picKurwa.Enabled = True
+        RitaMal(xMal, yMal)
         ' Starta timer
         Timer.Start()
 
@@ -22,7 +23,7 @@
         startTid = Now.Ticks
 
     End Sub
-    Private Sub btnRita_Click(sender As Object, e As EventArgs) Handles btnSkjut.Click
+    Private Sub skjut()
 
         ' Definiering av variabler som behövs till o rita
         Dim x, y, hastighet, tid, vinkel As Single
@@ -60,10 +61,10 @@
 
             ' Tillåt endast godkända värden och disabla rita om fel
             If (Val(txtVinkel.Text) > 90 Or Val(txtVinkel.Text) < 0) Then
-                btnSkjut.Enabled = False
+
                 txtVinkel.BackColor = Color.Pink
             Else
-                btnSkjut.Enabled = True
+
                 txtVinkel.BackColor = SystemColors.Window
             End If
         End If
@@ -85,7 +86,7 @@
         'Skriv ut antalet träffar och ge nya kordinater för mål, se till att rita knapp är disabled
         lblAntalTraffar.Text = antalTraffar
         NyttMal()
-        btnSkjut.Enabled = False
+
     End Sub
 
     Private Sub Form1_Paint(sender As Object, e As EventArgs) Handles Me.Paint
@@ -117,8 +118,8 @@
     Private Sub NyttMal()
 
         ' Skapa kordinater för nytt mål
-        xMal = picKurwa.Width * Rnd()
-        yMal = picKurwa.Height * Rnd()
+        xMal = (picKurwa.Width - 100) * Rnd() + 50
+        yMal = (picKurwa.Height - 100) * Rnd() + 50
     End Sub
 
     Private Sub Rensa()
@@ -152,6 +153,13 @@
         End If
     End Sub
 
+    Private Sub picKurwa_MouseUp(sender As Object, e As MouseEventArgs) Handles picKurwa.MouseUp
+        If e.Button = MouseButtons.Left Then
+            skjut()
+        End If
+
+    End Sub
+
     Private Sub Timer_Tick(sender As Object, e As EventArgs) Handles Timer.Tick
 
         ' Varibaler för tid kvar på timer
@@ -166,9 +174,11 @@
             lblTid.Text = 0
             ' Enabla börja knappen, disabla skjut knapp
             btnBorja.Enabled = True
-            btnSkjut.Enabled = False
+
             ' Stoppa timer
             Timer.Stop()
+            ' Inaktivera picturebox
+            picKurwa.Enabled = False
         End If
     End Sub
 End Class
